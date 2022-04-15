@@ -10,13 +10,15 @@
 
     <context:component-scan base-package="org.zerock.sp1.sample"/>
     <context:component-scan base-package="org.zerock.sp1.store"/>
+    <context:component-scan base-package="org.zerock.sp1.service"/>
+    <context:component-scan base-package="org.zerock.sp1.config"/>
 
     <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
         <property name="driverClassName"
                   value="org.mariadb.jdbc.Driver"></property>
         <property name="jdbcUrl"
-                  value="jdbc:mariadb://localhost:3306/webdb"></property>
-        <property name="username" value="webser"></property>
+                  value="jdbc:mariadb://106.241.252.54:8090/webdb"></property>
+        <property name="username" value="webuser"></property>
         <property name="password" value="webuser"></property>
     </bean>
     <!-- HikariCP configuration -->

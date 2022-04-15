@@ -59,6 +59,12 @@ dependencies {
     // https://mvnrepository.com/artifact/org.mybatis/mybatis-spring
     implementation 'org.mybatis:mybatis-spring:2.0.7'
 
+    // https://mvnrepository.com/artifact/org.modelmapper/modelmapper
+    implementation 'org.modelmapper:modelmapper:3.1.0'
+
+    // https://mvnrepository.com/artifact/jstl/jstl
+    implementation 'jstl:jstl:1.2'
+
 
 }
 

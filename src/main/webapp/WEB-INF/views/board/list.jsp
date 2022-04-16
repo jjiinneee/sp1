@@ -15,7 +15,7 @@
 </ul>
 <script>
     <%--const result = ${result == null ? '' : result};--%>
-    const result = ${result};
+    const result = '${result}';
     console.log("result" + result);
 
     if(result !== ''){

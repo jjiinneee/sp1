@@ -50,10 +50,12 @@ public class BoardController {
         log.info("-------post-------");
         log.info(boardDTO);
 
-        //한번만 읽고 사라짐
+        //한번만 읽고 사라짐(한번만 잠깐 쓰고 다시는 안쓰고싶을때)
         rttr.addFlashAttribute("result", 123);
-        //값 추가하고 싶을때 사용
-        rttr.addAttribute("num",1234);
+
+        //값 추가하고 싶을때 사용 (listponse Header locationㅇㅔ 내역나옴)
+        // redirect 할때 데이터를 뒤에 붙이고 싶으면 addAttribute
+      //  rttr.addAttribute("num",321);
         return "redirect:/board/list";
 //        return  "redirect:/board/list?result=123";
 

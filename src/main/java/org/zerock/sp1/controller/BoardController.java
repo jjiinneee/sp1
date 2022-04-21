@@ -1,5 +1,6 @@
 package org.zerock.sp1.controller;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,9 +15,23 @@ import org.zerock.sp1.service.BoardService;
 @Log4j2
 @Controller
 @RequestMapping("/board")
+@RequiredArgsConstructor
 public class BoardController {
 
-    private  BoardService service;
+    private final BoardService service;
+    
+    @GetMapping("/read/{bno}")
+    public String read(@PathVariable("bno") Long bno, ListDTO listDTO, Model model){
+        log.info("Readd------");
+        log.info(bno);
+        log.info(listDTO);
+        
+        //사용자가 정의한 함수 model로 전송쓰
+        
+        return "/board/read";
+    }
+    
+    
     @GetMapping("/")
     public String basic(){
         return "redirect:/board/list";
@@ -32,10 +47,10 @@ public class BoardController {
         log.info(listDTO);
 
         model.addAttribute("dtoList",responseDTO.getDtoList());
-      //  model.addAttribute("total",responseDTO.getTotal());
+        model.addAttribute("total",responseDTO.getTotal());
         //log.info(page);
         int total = responseDTO.getTotal();
-//        model.addAttribute("pageMaker", new PageMaker(,total));
+        model.addAttribute("pageMaker", new PageMaker(listDTO.getPage(), total));
     }
 
 

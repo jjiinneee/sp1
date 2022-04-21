@@ -35,7 +35,7 @@
              , title
              , content
              , writer
-             , regdate
+             , to_char(regdate,'yyyy-mm-dd') as regdate
              , updateDate
         from tbl_board
         <include refid="search"/>
@@ -64,6 +64,9 @@
     </select>
 
     <update id="update" >
-
+        update  tbl_board
+        set title = #{title}
+        ,content = #{content}
+        where bno= #{bno}
     </update>
 </mapper>

@@ -10,4 +10,10 @@ import java.util.List;
 public interface BoardService {
 
     ListResponseDTO<BoardDTO> getList(ListDTO listDTO);
+    
+    BoardDTO getOne(int bno);
+    
+    void remove(int bno);
+
+    void update(BoardDTO boardDTO);
 }

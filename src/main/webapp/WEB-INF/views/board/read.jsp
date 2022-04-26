@@ -49,5 +49,13 @@
             document.querySelector(".replyUL").innerHTML = liStr;
         })
         .catch(err => console.log(err));
+    
+    document.querySelector(".listBtn").addEventListener("click", (e) =>{
+        self.location = `/board/list${listDTO.link}`;
+    },false);
+    
+    document.querySelector(".modBtn").addEventListener("click",(e) =>{
+        self.location = `/board/modify/${bno}${listDTO.link}`;
+    },false);
 </script>
 </html>

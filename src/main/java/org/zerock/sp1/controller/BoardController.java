@@ -21,17 +21,24 @@ public class BoardController {
     private final BoardService service;
     
     @GetMapping("/read/{bno}")
-    public String read(@PathVariable("bno") Long bno, ListDTO listDTO, Model model){
+    public String read(@PathVariable("bno") Integer bno, ListDTO listDTO, Model model){
         log.info("Readd------");
         log.info(bno);
         log.info(listDTO);
         
         //사용자가 정의한 함수 model로 전송쓰
+        model.addAttribute("dto", service.getOne(bno));
         
         return "/board/read";
     }
     
     
+    @GetMapping({"modify/{bno}"})
+    public String modifyGET(@PathVariable("bno") Integer bno, ListDTO listDTO, Model model){
+        model.addAttribute("dto", service.getOne(bno));
+        
+        return "/board/modify";
+    }
     @GetMapping("/")
     public String basic(){
         return "redirect:/board/list";
@@ -74,5 +81,35 @@ public class BoardController {
         return "redirect:/board/list";
 //        return  "redirect:/board/list?result=123";
 
+    }
+    
+    
+    @GetMapping({"/remove/{bno"})
+    public String getNotSupported(){
+        return "redirect:/board/list";
+    }
+    @PostMapping("/remove/{bno}")
+    public String removePost(
+            @PathVariable ("bno") Integer bno,
+            RedirectAttributes rttr){
+    
+//        try {
+//            Thread.sleep(1000);
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
+        
+        service.remove(bno);
+        rttr.addFlashAttribute("result", "removed");
+        return "redirect:/board/list";
+    }
+    
+    @PostMapping("/modify/{bno}")
+    public String removePost(@PathVariable("bno") Integer bno, BoardDTO boardDTO,  ListDTO listDTO,  RedirectAttributes rttr){
+        service.update(boardDTO);
+        
+        rttr.addFlashAttribute("result", "modified");
+        
+        return "redirect:/board/read/"+bno + listDTO.getLink();
     }
 }

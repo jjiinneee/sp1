@@ -31,8 +31,12 @@
   </c:forEach>
 </ul>
 <style>
-  .pagination{
+  .pagination {
     display: flex;
+  }
+  .pagination .page-item {
+    margin: 0.3em;
+    list-style: none;
   }
 </style>
 <ul class="pagination">
@@ -110,6 +114,8 @@
         
         const type = document.querySelector(".searchDiv .type").value;
         const keyword = document.querySelector(".searchDiv input[name='keyword']").value;
+        
+        actionForm.setAttribute("action", "/board/list");
         actionForm.querySelector("input[name='page']").value = 1;
         actionForm.querySelector("input[name='type']").value = type;
         actionForm.querySelector("input[name='keyword']").value = keyword;
@@ -117,6 +123,12 @@
         console.log(type,keyword);
     },false);
     
+    
+    const result = '${result}';
+    
+    if(result !== ''){
+        alert("처리되었습니다.");
+    }
     <%--const result = ${result == null ? '' : result};--%>
     <%--const result = '${result}';--%>
     <%--console.log("result" + result);--%>

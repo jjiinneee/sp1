@@ -69,4 +69,8 @@
         ,content = #{content}
         where bno= #{bno}
     </update>
+
+    <update id="updateReplyCount">
+        update tbl_board set replyCount = replyCount + #{}
+    </update>
 </mapper>

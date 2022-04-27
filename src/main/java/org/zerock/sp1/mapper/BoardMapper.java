@@ -6,7 +6,7 @@ import org.zerock.sp1.dto.ListDTO;
 
 import java.util.List;
 
-public interface BoardMapper {
+public interface BoardMapper extends GenericMapper<Board, Integer>{
 
     void insert(Board board);
 
@@ -21,4 +21,7 @@ public interface BoardMapper {
     void update(Board board);
 
     int getTotal(ListDTO listDTO);
+    
+    void updateReplyCount(@Param("bno") Integer bno, @Param("amount") int amount);
+    
 }

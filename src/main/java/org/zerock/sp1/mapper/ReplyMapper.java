@@ -8,5 +8,6 @@ public interface ReplyMapper extends GenericMapper<Reply,Integer>{
   
   List<Reply> selectListOfBoard(Integer bno);
   
+  void insert(Reply reply);
   
 }

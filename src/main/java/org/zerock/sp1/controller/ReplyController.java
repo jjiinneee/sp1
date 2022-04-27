@@ -21,13 +21,17 @@ public class ReplyController {
   private final ReplyService replyService;
   
   @PostMapping("/")
-  public Map<String, Integer> register(
+//  public Map<String, Integer> register(
+  public Map<String, String> register(
           @RequestBody ReplyDTO replyDTO
   ){
     log.info("========");
     log.info(replyDTO);
 //    replyService.
-    return Map.of("result",135);
+//    return Map.of("result",135);
+    replyService.register(replyDTO);
+    
+    return Map.of("result","success");
   }
   
   @GetMapping("/test")

@@ -14,7 +14,7 @@ public class Reply {
   private Integer rno;
   private Integer bno;
   private String replyText;
-  private String replyer;
+  private String replier;
   private LocalDateTime regDate;
   private LocalDateTime updateDate;
 }

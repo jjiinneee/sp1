@@ -10,7 +10,7 @@ public class ReplyDTO {
   private Integer rno;
   private Integer bno;
   private String replyText;
-  private String replyer;
+  private String replier;
   
   @DateTimeFormat(pattern = "yyyy-mm-dd kk:mm:ss")
   private LocalDateTime regDate;

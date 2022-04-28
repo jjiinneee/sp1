@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: eunjin
-  Date: 2022/04/26
-  Time: 11:45 AM
+  Date: 2022/04/28
+  Time: 11:42 AM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -36,56 +36,38 @@
 </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="/resources/js/reply.js"></script>
 <script>
-    const  bno = ${dto.bno};
-    
-    document.querySelector(".addReplyBtn").addEventListener("click", (e) =>{
-        const replyText = document.querySelector("input[name='replyText']").value;
-        const replier = document.querySelector("input[name='replier']").value;
-        
-        const reply = {bno, replyText,replier};
-        sendPost(reply);
-        console.log(reply);
-        
-    },false);
-    
-    async function sendPost(reply){
-        const res = await axios.post(`/replies/`, reply);
-        
-        console.log(res);
-    }
-    
-    async function getReplyList(bno){
-        <%--return axios.get(`/replies/list/${bno}`)--%>
-        <%--    .then(res => res.data);--%>
-       try{
-           const res = await axios.get(`/replies/list/${bno}`);
-           const data = res.data;
-           return data;
-       }catch (e){
-           return e;
-       }
-       
-        
-    }
+  const bno = ${dto.bno};
+  const replyUL = qs(".replyUL");
+  const replyCount = ${dto.replyCount};
+  
+  // replyService.getList(bno,printReplies);
+  function getServerList(){
+    replyService.getList({bno}, (replyArr) =>{
+      const liArr = replyArr.map(reply => `<li>AAA</li>`);
+      replyUL.innerHTML = liArr.join(" ");
+    });
+  };
+  
+   function addServerReply(){
+     replyService.addReply(
+         { bno:bno ,
+           replyText: qs("input[name='replyText']").value,
+           replier: qs("input[name='replier']").value},
+         () => {
+           alert("!")
+           getServerList();
+         }
+     );
+   };
    
-    // getReplyList(bno)
-    //     .then(data => console.log(data))
-    //     .catch(err => console.log(err));
-
-    getReplyList(bno)
-        .then( arr => {
-            const  liStr  = arr.map(replyDTO => `<li>\${replyDTO.rno}<li>-- \${replyDTO}`).join(" ");
-            document.querySelector(".replyUL").innerHTML = liStr;
-        })
-        .catch(err => console.log(err));
-    
-    document.querySelector(".listBtn").addEventListener("click", (e) =>{
-        self.location = `/board/list${listDTO.link}`;
-    },false);
-    
-    document.querySelector(".modBtn").addEventListener("click",(e) =>{
-        self.location = `/board/modify/${bno}${listDTO.link}`;
-    },false);
+   qsAddEvent(".addReplyBtn", "click" , addServerReply);
+  
+  // function printReplies(replyArr){
+  //   const liArr = replyArr.map(reply => `<li>AAA</li>`);
+  //   replyUL.innerHTML = liArr.join(" ");
+  // }
 </script>
+</body>
 </html>

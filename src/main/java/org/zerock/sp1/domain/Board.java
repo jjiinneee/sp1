@@ -20,5 +20,8 @@ public class Board {
     
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime regDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime updateDate;
+    
+    private int replyCount;
 }

@@ -23,7 +23,9 @@
   <c:forEach items="${dtoList}"  var="board">
     <li>
       <span>${board.bno}</span>
-      <span><a class="dtoLink" href="/board/read/${board.bno}">${board.title}</a></span>
+      <span><a class="dtoLink" href="/board/read/${board.bno}">${board.title}</a>
+      [ <c:out value="${board.replyCount}"/> ]
+      </span>
         
         <%--            <span><fmt:formatDate pattern="yyyy-MM-dd" value="${board.regdate}" /></span>--%>
         <%--            <fmt:formatDate value="${board.regDate}" pattern="yyyy-MM-dd"/>--%>

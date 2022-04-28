@@ -37,6 +37,7 @@
              , writer
              , to_char(regdate,'yyyy-mm-dd') as regdate
              , updateDate
+             , replyCount
         from tbl_board
         <include refid="search"/>
         order by bno desc
@@ -71,6 +72,6 @@
     </update>
 
     <update id="updateReplyCount">
-        update tbl_board set replyCount = replyCount + #{}
+        update tbl_board set replyCount = replyCount
     </update>
 </mapper>

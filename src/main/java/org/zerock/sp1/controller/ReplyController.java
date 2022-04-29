@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.zerock.sp1.dto.ListDTO;
 import org.zerock.sp1.dto.ReplyDTO;
 import org.zerock.sp1.service.ReplyService;
 
@@ -22,16 +23,17 @@ public class ReplyController {
   
   @PostMapping("/")
 //  public Map<String, Integer> register(
-  public Map<String, String> register(
+  public Map<String, Integer> register(
           @RequestBody ReplyDTO replyDTO
   ){
     log.info("========");
     log.info(replyDTO);
 //    replyService.
 //    return Map.of("result",135);
-    replyService.register(replyDTO);
+    int totalCount = replyService.register(replyDTO);
     
-    return Map.of("result","success");
+//    return Map.of("result","success");
+    return Map.of("result", totalCount);
   }
   
   @GetMapping("/test")
@@ -41,8 +43,10 @@ public class ReplyController {
   
   @GetMapping(value = "/list/{bno}" , produces = MediaType.APPLICATION_JSON_VALUE)
   public List<ReplyDTO> getListOfBoard(
-          @PathVariable("bno") Integer bno
+          @PathVariable("bno") Integer bno,
+          ListDTO listDTO
   ){
-    return replyService.getListOfBoard(bno);
+    log.info("replyList" + listDTO);
+    return replyService.getListOfBoard(bno,listDTO);
   }
 }

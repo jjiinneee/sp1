@@ -5,11 +5,28 @@
 
 <mapper namespace="org.zerock.sp1.mapper.ReplyMapper">
   <select id="selectListOfBoard"  resultType="org.zerock.sp1.domain.Reply">
-    select * from tbl_reply where bno =#{bno}  and bno > 0 order by rno asc
+    select
+        rno,
+        bno,
+        replyText,
+        replier,
+        regDate,
+        updateDate
+    from tbl_reply
+    where bno =#{bno}
+    and bno > 0
+    order by rno asc
+    limit #{listDTO.skip}, #{listDTO.size}
   </select>
 
   <insert id="insert">
     insert into tbl_reply (bno, replyText, replier)
     values (#{bno} , #{replyText}, #{replier})
   </insert>
+
+  <select id="selectTotalOfBoard" resultType="int">
+    select count(rno) from tbl_reply where bno = #{bno} and bno > 0
+  </select>
+
+
 </mapper>

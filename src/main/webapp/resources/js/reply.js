@@ -1,11 +1,23 @@
 //모듈 패턴
 //즉시 실행 함수
 const replyService = (function () {
+  let setReplyCount;
 
-  const addReply = async function(replyObj,callback){
+  // const
+
+  const addReply = async function(replyObj,size, callback){
     console.log("addReply=====");
     const res = await axios.post("/replies/", replyObj);
-    callback();
+    console.log(res.data);
+    const replyCount = parseInt(res.data.result);
+
+    console.log("setReplyCount",setReplyCount);
+    setReplyCount(replyCount);
+
+    const bno = replyObj.bno;
+    const page = Math.ceil(replyCount/size);
+
+    callback({bno, page, size });
   }
 
   const getList = async function({bno,page,size}, callback){
@@ -21,15 +33,32 @@ const replyService = (function () {
 
   }
 
-  return {addReply, getList};
+  return {addReply, getList, setReplyCount};
 })();
 
 const qs = function(str){
   return document.querySelector(str);
 }
 
-const qsAddEvent = function(selector, type, callback){
+const qsAddEvent = function(selector, type, callback , tagName){
   const target = document.querySelector(selector);
 
-  target.addEventListener(type, callback,false);
+  if(!tagName){
+    target.addEventListener(type, callback,false);
+  }else{
+    target.addEventListener(type, (e) =>{
+      const realTarget = e.target;
+
+      if(realTarget.tagName !== tagName.toUpperCase()){
+        return;
+      }
+
+      callback(e,realTarget);
+    },false );
+  }
+
 }
+
+// const qsTossEvent = function(selector, tagName, type, callback){
+//
+// }

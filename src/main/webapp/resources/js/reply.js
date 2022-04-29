@@ -1,7 +1,10 @@
 //모듈 패턴
 //즉시 실행 함수
 const replyService = (function () {
-  let setReplyCount;
+  let setReplyCount = function(num){
+    replyCount = num;
+  };
+
 
   // const
 
@@ -11,7 +14,7 @@ const replyService = (function () {
     console.log(res.data);
     const replyCount = parseInt(res.data.result);
 
-    console.log("setReplyCount",setReplyCount);
+    console.log("replyCount",replyCount);
     setReplyCount(replyCount);
 
     const bno = replyObj.bno;

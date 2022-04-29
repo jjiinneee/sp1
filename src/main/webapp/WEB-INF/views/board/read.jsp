@@ -94,10 +94,10 @@
     pageUL.innerHTML = str;
   }
   
-  replyService.setReplyCount =  function setReplyCount(num){
-    console.log("num", num);
-    replyCount = num;
-  }
+  // replyService.setReplyCount =  function setReplyCount(num){
+  //   console.log("num", num);
+  //   replyCount = num;
+  // }
   console.log("==============");
   
   // replyService.getList(bno,printReplies);

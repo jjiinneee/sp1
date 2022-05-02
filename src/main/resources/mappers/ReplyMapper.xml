@@ -29,4 +29,11 @@
   </select>
 
 
+  <update id="updateReply">
+    update tb_reply
+    set
+        updateDate = now(),
+        replyText = #{replyText}
+    where rno = #{rno}
+  </update>
 </mapper>

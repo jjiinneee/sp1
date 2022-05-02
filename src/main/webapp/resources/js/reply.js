@@ -5,7 +5,11 @@ const replyService = (function () {
     replyCount = num;
   };
 
-
+  // let replyCountFn;
+  //
+  // let setReplyCount = function (fn) {
+  //   replyCountFn = fn;
+  // }
   // const
 
   const addReply = async function(replyObj,size, callback){

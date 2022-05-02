@@ -29,7 +29,7 @@ public class BoardController {
         //사용자가 정의한 함수 model로 전송쓰
         model.addAttribute("dto", service.getOne(bno));
         
-        return "/board/read";
+        return "/board/read2";
     }
     
     
@@ -110,6 +110,6 @@ public class BoardController {
         
         rttr.addFlashAttribute("result", "modified");
         
-        return "redirect:/board/read/"+bno + listDTO.getLink();
+        return "redirect:/board/read2/"+bno + listDTO.getLink();
     }
 }

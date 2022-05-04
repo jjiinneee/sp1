@@ -12,8 +12,15 @@
 </head>
 <body onload="noBack();" onpageshow="if(event.persisted) noBack();"  onunload="">
 <h1>Register page</h1>
-<form action="/board/register" method="post">
+<form class="actionForm" method="post">
+<%--<form action="/board/register" method="post">--%>
     <input type="text" name="title">
+    <input type="text"  name="title" value="파일업로드 테스트"/>
+    <input type="text"  name="content" value="파일업로드 테스트"/>
+    <input type="text"  name="writer" value="user00"/>
+<%--    <input type="hidden"  name="uploads[0].uuid" value="aaa"/>--%>
+<%--    <input type="hidden"  name="uploads[1].uuid" value="bcb"/>--%>
+<%--    <input type="hidden"  name="uploads[2].uuid" value="ccc"/>--%>
     <button>Click</button>
 </form>
 <h2>fileupload test</h2>

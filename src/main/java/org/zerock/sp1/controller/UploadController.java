@@ -1,5 +1,6 @@
 package org.zerock.sp1.controller;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import net.coobird.thumbnailator.Thumbnails;
 import org.springframework.http.ResponseEntity;
@@ -8,6 +9,7 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.zerock.sp1.dto.UploadResultDTO;
+import org.zerock.sp1.service.FileService;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -19,9 +21,10 @@ import java.util.*;
 
 @Controller
 @Log4j2
+@RequiredArgsConstructor
 public class UploadController {
 
-
+//  private final FileService fileService;
 
 //  @GetMapping("/view/{fileName : .+ }")
 //  public void viewFile(@PathVariable("fileName") String fileName){
@@ -49,7 +52,8 @@ public class UploadController {
   public Map<String, String> fileDelete(String fileName){
     int idx = fileName.lastIndexOf("/");
     String path = fileName.substring(0,idx);
-    String name = fileName.substring(idx+1);
+    String name = fileName.substring(idx+1);   //uuid_filename
+    String uuid = name.substring(0,name.indexOf("_"));
     log.info("path" + path);
     log.info("name" + name);
     File targetFile = new File("/Users/eunjin/upload/" + fileName);
@@ -61,6 +65,9 @@ public class UploadController {
       File thumbFile = new File("/Users/eunjin/upload/"+path +"s_"+name);
       thumbFile.delete();
     }
+    
+//    fileService.remove(uuid);
+    
     return Map.of("result", "success");
   }
   @PostMapping("/upload1")
@@ -119,11 +126,20 @@ public class UploadController {
         }
       }
   
-      list.add(UploadResultDTO.builder()
+//      list.add(UploadResultDTO.builder()
+//                      .orgFileName(originalFileName)
+//                      .uuid(uuid)
+//                      .filePath(saveFolder)
+//              .build());
+      
+      UploadResultDTO uploadResultDTO = UploadResultDTO.builder()
                       .orgFileName(originalFileName)
                       .uuid(uuid)
                       .filePath(saveFolder)
-              .build());
+              .build();
+      
+      list.add(uploadResultDTO);
+//      fileService.register(uploadResultDTO);
       
       log.info("------------");
     }

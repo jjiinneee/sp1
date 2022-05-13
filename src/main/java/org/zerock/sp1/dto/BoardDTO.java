@@ -20,6 +20,7 @@ public class BoardDTO {
     private String title;
     private String content;
     private String writer;
+    private String mainImage;
     
     private List<UploadResultDTO> uploads = new ArrayList<>();
 
@@ -28,4 +29,6 @@ public class BoardDTO {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime updateDate;
     private int replyCount;
+    
+    
 }

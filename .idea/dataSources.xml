@@ -8,5 +8,12 @@
       <jdbc-url>jdbc:mariadb://106.241.252.54:8090/webdb</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="test_jin@106.241.252.54" uuid="da7c1bfe-63bc-49ca-a748-dcc9d7ab5731">
+      <driver-ref>mariadb</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.mariadb.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mariadb://106.241.252.54:8090/test_jin</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

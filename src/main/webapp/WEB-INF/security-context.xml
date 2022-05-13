@@ -8,6 +8,7 @@
   <security:http>
 
     <security:form-login />
+
     <security:intercept-url pattern="/sample/all"></security:intercept-url>
     <security:intercept-url pattern="/sample/member" access="hasRole('ROLE_MEMBER')"></security:intercept-url>
 
@@ -17,8 +18,10 @@
     <security:authentication-provider>
       <security:password-encoder ref="passwordEncoder"></security:password-encoder>
       <security:user-service>
-        <security:user name="user00" authorities="ROLE_MEMBER"  password="1111"></security:user>
+        <security:user name="user00" authorities="ROLE_MEMBER" password="$2a$10$CFGxXjKVdJxTJV.cTxQ2RuY1j984hT0IzzlUeWjEh9ITKDSh2N3sK"></security:user>
       </security:user-service>
     </security:authentication-provider>
+
   </security:authentication-manager>
+
 </beans>

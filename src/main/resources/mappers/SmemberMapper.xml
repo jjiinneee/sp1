@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.sp1.mapper.SmemberMapper">
+
+  <resultMap id="merberMap" type="org.zerock.sp1.domain.Smember">
+    <result property="mid" column="mid"></result>
+    <result property="mpw" column="mpw"></result>
+    <result property="name" column="name"></result>
+    <result property="nickname" column="nickname"></result>
+    <collection property="sauthList" resultMap="authMap" ></collection>
+  </resultMap>
+
+  <resultMap id="authMap" type="org.zerock.sp1.domain.Sauth">
+    <result property="mid" column="mid"></result>
+    <result property="rolename" column="rolename"></result>
+  </resultMap>
+
+  <select id="selectOne" resultMap="merberMap">
+    select *
+    from tbl_smember a
+    inner join tbl_sauth b on a.mid = b.mid
+    where a.mid = #{mid}
+  </select>
+</mapper>

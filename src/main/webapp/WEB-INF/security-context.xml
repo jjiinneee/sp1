@@ -5,21 +5,36 @@
        xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+
+
+  <bean id="loginFailHandler" class="org.zerock.sp1.security.handler.CustomLoginFailHandler"></bean>
+
   <security:http>
 
-    <security:form-login />
+
+<!--  login-processing-url post 방식으로 처리하는 애(어디로 날리는지) / 기본경로 login -->
+    <security:form-login login-page="/customLogin"  authentication-failure-handler-ref="loginFailHandler"/>
 
     <security:intercept-url pattern="/sample/all"></security:intercept-url>
     <security:intercept-url pattern="/sample/member" access="hasRole('ROLE_MEMBER')"></security:intercept-url>
+    <security:intercept-url pattern="/sample/admin" access="hasRole('ROLE_ADMIN')"></security:intercept-url>
+
+    <security:access-denied-handler error-page="/accessError"/>
+
+    <security:csrf disabled="true"/>
 
   </security:http>
 
+
+
   <security:authentication-manager>
-    <security:authentication-provider>
+    <security:authentication-provider user-service-ref="customUserDetailsService">
       <security:password-encoder ref="passwordEncoder"></security:password-encoder>
-      <security:user-service>
-        <security:user name="user00" authorities="ROLE_MEMBER" password="$2a$10$CFGxXjKVdJxTJV.cTxQ2RuY1j984hT0IzzlUeWjEh9ITKDSh2N3sK"></security:user>
-      </security:user-service>
+<!--      <security:user-service>-->
+<!--        <security:user name="user00" authorities="ROLE_MEMBER" password="$2a$10$CFGxXjKVdJxTJV.cTxQ2RuY1j984hT0IzzlUeWjEh9ITKDSh2N3sK"></security:user>-->
+<!--        <security:user name="admin00" authorities="ROLE_MEMBER,ROLE_ADMIN" password="$2a$10$CFGxXjKVdJxTJV.cTxQ2RuY1j984hT0IzzlUeWjEh9ITKDSh2N3sK"></security:user>-->
+<!--      </security:user-service>-->
+
     </security:authentication-provider>
 
   </security:authentication-manager>
